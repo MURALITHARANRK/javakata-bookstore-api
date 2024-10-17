@@ -2,6 +2,7 @@ package com.bookstore.handler;
 
 import com.bookstore.dto.ApiErrorDTO;
 import com.bookstore.exceptions.BookException;
+import com.bookstore.exceptions.UserException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,6 +22,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BookException.class)
     public ResponseEntity<ApiErrorDTO> handleBookException(BookException bookException){
         ApiErrorDTO apiErrorDTO = ApiErrorDTO.builder().status("FAILED").errorMessage(bookException.getMessage()).httpStatus(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        return new ResponseEntity<>(apiErrorDTO, HttpStatus.EXPECTATION_FAILED);
+    }
+
+    @ExceptionHandler(UserException.class)
+    public ResponseEntity<ApiErrorDTO> handleUserException(UserException userException){
+        ApiErrorDTO apiErrorDTO = ApiErrorDTO.builder().status("FAILED").errorMessage(userException.getMessage()).httpStatus(HttpStatus.INTERNAL_SERVER_ERROR).build();
         return new ResponseEntity<>(apiErrorDTO, HttpStatus.EXPECTATION_FAILED);
     }
 

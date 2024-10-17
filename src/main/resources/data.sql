@@ -8,3 +8,6 @@ INSERT INTO `book` (`title`, `author`, `price`) VALUES ('Think and Grow Rich', '
 INSERT INTO `book` (`title`, `author`, `price`) VALUES ('How to Win Friends and Influence People', 'Dale Carnegie', 130);
 INSERT INTO `book` (`title`, `author`, `price`) VALUES ('Rich Dad Poor Dad', 'Robert T. Kiyosaki', 120);
 INSERT INTO `book` (`title`, `author`, `price`) VALUES ('The Power of your subconscious mind', 'Dr. Joseph Murphy', 110);
+
+INSERT INTO `BOOK_STORE_USERS` (`username`, `password`) VALUES ('user1', 'password');
+INSERT INTO `BOOK_STORE_USERS` (`username`, `password`) VALUES ('user2', 'password');
