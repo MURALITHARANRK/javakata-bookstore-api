@@ -34,6 +34,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public User findUserbyName(String username) {
+        return this.userRepository.findByUsername(username).get();
+    }
+
     private User mapUserDTOtoUser(UserDTO userDTO) {
         return this.modelMapper.map(userDTO, User.class);
     }

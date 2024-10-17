@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Muralitharan R K
@@ -37,6 +38,11 @@ public class BookServiceImpl implements BookService {
         } catch (Exception e) {
             throw new BookException("Failed to add book into database");
         }
+    }
+
+    @Override
+    public Optional<Book> getBookById(Long bookId) {
+        return this.bookRepository.findById(bookId);
     }
 
     private Book mapBookDTOtoBook(BookDTO bookDTO) {
