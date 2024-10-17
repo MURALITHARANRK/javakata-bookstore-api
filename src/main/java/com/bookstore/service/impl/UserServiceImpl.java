@@ -7,7 +7,10 @@ import com.bookstore.repository.UserRepository;
 import com.bookstore.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * @author Muralitharan R K
@@ -18,6 +21,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private TokenService tokenService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -37,6 +46,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserbyName(String username) {
         return this.userRepository.findByUsername(username).get();
+    }
+
+    @Override
+    public boolean authenticate(String username, String password) {
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+        if (optionalUser.isPresent()) {
+            if (!passwordEncoder.matches(password, optionalUser.get().getPassword())) {
+                return true;
+            } else {
+                throw new UserException("Invalid username or password");
+            }
+        } else {
+            throw new UserException("User not found: " + username);
+        }
+    }
+
+    @Override
+    public String generateTokenForUser(Object user) {
+        return tokenService.generateToken((User)user);
     }
 
     private User mapUserDTOtoUser(UserDTO userDTO) {
