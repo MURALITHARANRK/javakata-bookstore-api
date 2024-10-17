@@ -3,6 +3,7 @@ package com.bookstore.handler;
 import com.bookstore.dto.ApiErrorDTO;
 import com.bookstore.exceptions.BookException;
 import com.bookstore.exceptions.CartException;
+import com.bookstore.exceptions.OrderException;
 import com.bookstore.exceptions.UserException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CartException.class)
     public ResponseEntity<ApiErrorDTO> handleCartException(CartException cartException){
         ApiErrorDTO apiErrorDTO = ApiErrorDTO.builder().status("FAILED").errorMessage(cartException.getMessage()).httpStatus(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        return new ResponseEntity<>(apiErrorDTO, HttpStatus.EXPECTATION_FAILED);
+    }
+
+    @ExceptionHandler(OrderException.class)
+    public ResponseEntity<ApiErrorDTO> handleCartException(OrderException orderException){
+        ApiErrorDTO apiErrorDTO = ApiErrorDTO.builder().status("FAILED").errorMessage(orderException.getMessage()).httpStatus(HttpStatus.INTERNAL_SERVER_ERROR).build();
         return new ResponseEntity<>(apiErrorDTO, HttpStatus.EXPECTATION_FAILED);
     }
 

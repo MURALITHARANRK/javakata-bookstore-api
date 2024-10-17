@@ -67,6 +67,16 @@ public class CartServiceImpl implements CartService {
         return mapCarttoCartDTO(cartItemDTOList, cart);
     }
 
+    @Override
+    public void removeCart(Cart cart) {
+        this.cartRepository.delete(cart);
+    }
+
+    @Override
+    public Optional<Cart> getCartDetailsByUser(User user) {
+        return this.cartRepository.findByUser(user);
+    }
+
     private CartDTO mapCarttoCartDTO(List<CartItemDTO> cartItemDTOList, Cart cart) {
         CartDTO cartDTO = new CartDTO();
         cartDTO.setUsername(cart.getUser().getUsername());
