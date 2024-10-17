@@ -1,4 +1,4 @@
-package com.bookstore.service.impl;
+package com.bookstore.service;
 
 import com.bookstore.entities.User;
 

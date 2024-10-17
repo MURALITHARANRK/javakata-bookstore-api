@@ -1,6 +1,7 @@
 package com.bookstore.service.impl;
 
 import com.bookstore.entities.User;
+import com.bookstore.service.TokenService;
 import com.bookstore.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @project javakata-bookstore-api
  */
 @Service
-public class TokenServiceImpl implements TokenService{
+public class TokenServiceImpl implements TokenService {
 
     @Autowired
     private JWTUtil jwtUtil;

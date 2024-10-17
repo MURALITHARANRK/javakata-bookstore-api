@@ -40,3 +40,87 @@ password:password
 http://localhost:8080/h2-console/
 ```
 
+
+### Follow the below steps to access endpoints
+
+Use the following credential to generate JWT Token
+
+username: user1<br/>
+password: password
+
+**Endpoint:** **GET** /api/login<br/>
+**Authorization**: Basic Auth (use the given username and password)<br/>
+**Response:** Token will be generated
+```
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInJvbGVzIjpbXSwiZXhwIjoxNzI5MjExODkwLCJpYXQiOjE3MjkyMDU4OTB9.9mndQw-S27GEhqdbQSN6Jdaox8ULpp7gcx1W6SmVt28
+```
+### Get all the books
+**Endpoint:** **GET** /api/book<br/>
+**Authorization**: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInJvbGVzIjpbXSwiZXhwIjoxNzI5MjExODkwLCJpYXQiOjE3MjkyMDU4OTB9.9mndQw-S27GEhqdbQSN6Jdaox8ULpp7gcx1W6SmVt28<br/>
+**Response:** 
+```
+[
+    {
+        "id": 1,
+        "title": "Head First Java",
+        "author": "Kathy Sierra",
+        "price": 200
+    },
+    {
+        "id": 2,
+        "title": "The Pragmatic Programmer",
+        "author": "Andrew Hunt",
+        "price": 190
+    },
+    {
+        "id": 3,
+        "title": "Clean Code",
+        "author": "Robert C. Martin",
+        "price": 180
+    }
+]
+```
+### Add book
+**Endpoint:** **POST** /api/book<br/>
+**Authorization**: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInJvbGVzIjpbXSwiZXhwIjoxNzI5MjExODkwLCJpYXQiOjE3MjkyMDU4OTB9.9mndQw-S27GEhqdbQSN6Jdaox8ULpp7gcx1W6SmVt28<br/>
+**Request Body:**
+```
+{
+    "title": "NewBook",
+    "author": "NewBookAuthor",
+    "price": 150
+}
+```
+
+### Add book to Cart
+**Endpoint:** **POST** /api/cart/user1<br/>
+**Authorization**: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInJvbGVzIjpbXSwiZXhwIjoxNzI5MjExODkwLCJpYXQiOjE3MjkyMDU4OTB9.9mndQw-S27GEhqdbQSN6Jdaox8ULpp7gcx1W6SmVt28<br/>
+**Request Body:**
+```
+[
+    {
+        "bookId": 8,
+        "quantity": 4
+    },
+    {
+        "bookId": 1,
+        "quantity": 4
+    }
+]
+```
+**Response:**
+```
+{
+    "username": "user2",
+    "cartItems": [
+        {
+            "bookId": "8",
+            "quantity": 4
+        },
+        {
+            "bookId": "1",
+            "quantity": 4
+        }
+    ]
+]
+```

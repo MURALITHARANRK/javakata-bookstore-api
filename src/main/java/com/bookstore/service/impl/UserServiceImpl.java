@@ -4,6 +4,7 @@ import com.bookstore.dto.UserDTO;
 import com.bookstore.entities.User;
 import com.bookstore.exceptions.UserException;
 import com.bookstore.repository.UserRepository;
+import com.bookstore.service.TokenService;
 import com.bookstore.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
